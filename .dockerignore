@@ -1,0 +1,27 @@
+# Git
+.git
+.gitignore
+
+# Node.js
+node_modules
+
+# Vendor（コンテナ内でcomposer installするため）
+# vendor
+
+# IDE
+.idea
+.vscode
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Laravel
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+bootstrap/cache/*
+
+# Docker volumes
+docker/mysql/data
