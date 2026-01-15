@@ -96,6 +96,10 @@ jobs:
             # Composerの依存関係を更新（本番環境用）
             composer install --no-dev --optimize-autoloader --no-interaction
 
+            # Node.jsの依存関係をインストールしてビルド
+            npm install
+            npm run build
+
             # Laravelのキャッシュをクリア
             php artisan config:clear
             php artisan cache:clear
@@ -116,6 +120,10 @@ jobs:
             # 権限設定（Nginx + PHP-FPM環境）
             chmod -R 775 storage bootstrap/cache
             chown -R ec2-user:nginx storage bootstrap/cache
+
+            # デプロイ後のログチェック（最新のエラーを確認）
+            echo "=== Checking Laravel logs ==="
+            tail -20 storage/logs/laravel.log 2>/dev/null || echo "No Laravel log file found"
           EOF
 
           # SSHのセキュリティグループを閉じる
