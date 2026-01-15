@@ -96,6 +96,13 @@ jobs:
             # Composerの依存関係を更新（本番環境用）
             composer install --no-dev --optimize-autoloader --no-interaction
 
+            # Node.jsがインストールされているか確認、なければインストール
+            if ! command -v npm &> /dev/null; then
+              echo "Node.js is not installed. Installing..."
+              curl -fsSL https://rpm.nodesource.com/setup_20.x | sudo bash -
+              sudo yum install -y nodejs
+            fi
+
             # Node.jsの依存関係をインストールしてビルド
             npm install
             npm run build
