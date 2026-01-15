@@ -113,8 +113,11 @@ jobs:
             php artisan view:clear
             php artisan route:clear
 
-            # マイグレーション実行（必要に応じてコメント解除）
-            # php artisan migrate --force
+            # マイグレーション実行
+            php artisan migrate --force
+
+            # データベースシード実行（初回のみ、またはリセットが必要な場合）
+            php artisan db:seed --force
 
             # 本番環境用のキャッシュを生成
             php artisan config:cache
