@@ -87,7 +87,11 @@ jobs:
             # Gitから最新を取得
             git fetch --prune
             git checkout main
+
+            # ローカル変更をstashしてからpull
+            git stash
             git pull origin main
+            git stash drop 2>/dev/null || true
 
             # Composerの依存関係を更新（本番環境用）
             composer install --no-dev --optimize-autoloader --no-interaction
